@@ -1,0 +1,15 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	const double PI = 3.1416;
+	double m, ro, r;
+	cout << "Enter ro: "; cin >> ro;
+	cout << "Enter r: "; cin >> r;
+	m = 4 / 3.0 * ro * PI * pow(r, 3.0);
+	cout << "Mass is " << m ;
+	return 0;
+}

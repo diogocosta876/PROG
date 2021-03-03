@@ -1,0 +1,24 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	int h1, h2, h3, m1, m2, m3, s1, s2, s3, d3;
+	int m3total, h3total;
+	char separator;
+	cout << "h1:m1:s1: "; cin >> h1 >> separator >> m1 >> separator >> s1;
+	cout << "h2:m2:s2: "; cin >> h2 >> separator >> m2 >> separator >> s2;
+
+	s3 = (s1 + s2) % 60;
+	m3total = ((s1 + s2) / 60 + m1 + m2);
+	m3 = m3total % 60;
+	h3total = (m3total / 60 + h1 + h2);
+	h3 = h3total % 24;
+	d3 = h3total / 24;
+
+
+	cout << d3 << " days, " << h3 << " hours, " << m3 << " minutes, and " << s3 << " seconds, ";  //time 1 + time 2
+	return 0;
+}
