@@ -1,0 +1,27 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	int weight;
+	double price;
+	cout << "weight in grams: "; cin >> weight;
+
+	if (weight <= 500 and weight > 0) {
+		price = 5;
+	}
+	else if (weight >= 501 and weight <= 1000){
+		price = 5 + 1.5 * ((weight - 500) / 100);
+	}
+	else if (weight > 1000){
+		price = 12.5 + 5 * ((weight - 1000) / 250);
+	}
+	else {
+		cout << "invalid price ";
+	}
+
+	cout << "price: " << price;
+	return 0;
+}

@@ -1,0 +1,26 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	int a, b, c, max, min;
+	cout << "Enter 3 integers: "; cin >> a >> b >> c;
+	int set[3] = { a,b,c };
+
+	min = INT_MAX;
+	max = INT_MIN;
+	for (int i = 0; i < 3; i++) {
+		if (set[i] <= min) {
+			min = set[i];
+		}
+		if (set[i] >= max) {
+			max = set[i];
+		}
+	}
+
+	cout << "max: " << max << endl;
+	cout << "min: " << min << endl;
+	
+	return 0;

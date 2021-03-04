@@ -1,0 +1,23 @@
+#include <iostream>
+using std::cout;
+using std::cin;
+int main()
+{
+	int total = 0, i = 0;
+	while (i < 5){
+		int op2 = 0;
+		cout << " input a number";
+		cin >> op2;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(1000, '\n');
+			cout << "invalid number!\n";
+		}
+		else {
+			total = total + op2;
+			i++;
+		}
+	}
+	cout << "sum: " << total;
+	return 0;
+}
