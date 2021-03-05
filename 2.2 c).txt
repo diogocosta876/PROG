@@ -1,0 +1,22 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    int n1, n2, n3;
+    cout << "input 3 triangle side lengths"; cin >> n1 >> n2 >> n3;
+
+    if (n1 < 0 || n2 < 0 || n3 < 0) {
+        cerr << "At least one of the inputs is of incorrect type." << endl;
+    }
+    if (n1 + n2 > n3 && n1 + n3 > n2 && n2 + n3 > n1) {
+        cout << "possible" << endl;
+    }
+    else {
+        cout << "impossible" << endl;
+    }
+
+    return 0;
+}
