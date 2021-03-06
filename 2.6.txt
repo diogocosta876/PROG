@@ -1,0 +1,21 @@
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    double depositedAmount, interestRate;
+    int years;
+
+    cout << "Amount to deposit (euros): "; cin >> depositedAmount;
+    cout << "Years (int): "; cin >> years;
+    cout << "Interest rate (%): "; cin >> interestRate;
+
+    while (years > 0) {
+        depositedAmount += interestRate / 100 * depositedAmount;
+        years -= 1 ;
+    }
+
+    cout << "Final Amount: " << depositedAmount << " euros";
+
+    return 0;
+}

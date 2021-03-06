@@ -1,0 +1,29 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+double degrees2radians(double i) {
+    double PI = 3.14159265358979323846;
+    return (i*PI/180);
+}
+
+int main() {
+    double increment, x, y;
+    cout << "degrees increment: "; cin >> increment;
+    cout << "range x y :"; cin >> x >> y;
+
+    cout << fixed << setprecision(8);
+    cout << "ang\tsin\t\tcos\t\ttan" << endl;
+
+    for (int i = x; i <= y; i += increment) {
+        cout << i << "\t" << sin(degrees2radians(i)) << "\t" << cos(degrees2radians(i)) << "\t";
+        if (i == 90) {
+            cout << "infinite" << endl;
+        }
+        else {
+            cout << tan(degrees2radians(i)) << endl;
+        }
+    }
+    return 0;
+}
