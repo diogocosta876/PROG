@@ -1,0 +1,25 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main() {
+    
+    int num, aux, digit, rev = 0;
+    cout << "insert integer palindrome: "; cin >> num;
+
+    aux = num;
+
+    for (int i = 0; aux >= 1; i++) {
+        digit = aux % 10;
+        aux = aux / 10;
+        rev = rev * 10 + digit;
+    }
+    if (num == rev) {
+        cout << "True";
+    }
+    else {
+        cout << "False";
+    }
+    return 0;
+}
