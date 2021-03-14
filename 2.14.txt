@@ -1,0 +1,42 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+void ex(double n, double delta, double nMaxiter) {
+    double rqn = 1.0;
+    int counter = 0, decimalplaces= 0;
+    double aux = delta;
+   
+    while (aux < 1) {      //Find decimal places to present result
+        aux *= 10;
+        decimalplaces++;
+    }
+
+    while (abs(rqn * rqn - n) > delta && counter < nMaxiter) {       // determine the root
+        rqn = (rqn + n / rqn) / 2.0;
+
+        counter++;
+        cout << "rnq: " << rqn << "\t";
+        cout << "root(n): " << sqrt(n) << endl;
+    }
+    cout << endl;
+    cout << fixed << setprecision(decimalplaces) << "program root: " << rqn << "\treal root: " << sqrt(n);
+    cout << endl;
+}
+
+int main() {
+
+    double n, delta, nMaxiter;
+
+    cout << "n: "; cin >> n;
+    cout << "delta: "; cin >> delta;
+    cout << "nMaxiter: "; cin >> nMaxiter;
+
+    ex(n,delta, nMaxiter);
+
+    return 0;
+}

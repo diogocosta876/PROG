@@ -1,0 +1,103 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <vector>
+#include <stdlib.h>
+#include <algorithm>
+#include <chrono>
+#include <ctime>
+
+using namespace std;
+
+
+double calc(int a, int b, char op) {
+    double result;
+    if (op == '*') {
+        result = a * b;
+        return result;
+    }
+    else if (op == '+') {
+        result = a + b;
+        return result;
+    }
+    else if (op == '-') {
+        result = a - b;
+        return result;
+    }
+    else if (op == '/') {
+        result = a / float(b);
+        return result;
+    }
+}
+
+int main() {
+    double a, b, result = 0, memory;
+    char op;
+    string input;
+
+    cout << "\n";
+    cout << "If you want to perform an operation type \"c\"";
+    cout << "Then, \"<operand1>*operation*<operand2>\"" << endl; //format of input
+    cout << "\n";
+
+    cout << "Available operations: " << endl; //telling the user which operations are available
+    cout << "Addition: +" << endl;
+    cout << "Subtraction: -" << endl;
+    cout << "Multiplication: *" << endl;
+    cout << "Division: /" << endl;
+    cout << "\n";
+
+    cout << "The following additional commands are also available: " << endl; //telling the user which additional commands are available
+    cout << "Save the result: M" << endl;
+    cout << "Clear the result on memory: MC" << endl;
+    cout << "Add the current result to the memory result: M+" << endl;
+    cout << "Subtract the current result to the memory result: M-" << endl;
+    cout << "Show the current value on memory: MR" << endl;
+    cout << "Clear the contents of the display: C" << endl;
+    cout << "\n";
+    while (true) {
+        cin >> input;
+
+        if (input == "c") {
+            cin >> a >> op >> b;
+            result = calc(a, b, op);
+            cout << result << "\n" << endl;
+        }
+
+        else if (input == "M") {
+            memory = result;
+        }
+        else if (input == "MC") {
+            memory = 0;
+        }
+        else if (input == "M+") {
+            result = result + memory;
+            cout << result << "\n" << endl;
+        }
+        else if (input == "M-") {
+            result = result - memory;
+            cout << result << "\n" << endl;
+        }
+        else if (input == "MR") {
+            cout << "M --> " << memory;
+        }
+
+        else if (input == "C") {
+            for (int i = 0; i < 30; i++) {
+                cout << "\n";
+            }
+        }
+
+        if (cin.eof()) {
+            return 0;
+        }
+
+        else {
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+    }
+
+
+    return 0;
+}

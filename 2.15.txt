@@ -1,0 +1,43 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <vector>
+#include <stdlib.h>
+#include <algorithm>
+#include <chrono>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+
+    int a, b, input;
+    double time_elapsed;
+
+    srand(unsigned(time(0)));
+    a = rand() % (9 - 2 + 1) + 2;                    // rand() % ( high - low + 1 ) + low     (?)
+    b = rand() % (9 - 2 + 1) + 2;
+    
+    cout << a << " * " << b << endl;
+    cout << "result: ";
+    chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    cin >> input; cout << endl;
+    chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    time_elapsed = chrono::duration_cast<chrono::milliseconds> (end - begin).count() / 1000.0;
+    cout << "Time elapsed " << time_elapsed << endl;
+
+    if (input != a * b) {
+        cout << "very bad";
+    }
+    else {
+        if (time_elapsed < 5)
+            cout << "Good";
+        else if (time_elapsed >= 5 && time_elapsed <= 10)
+            cout << "Satisfactory";
+        else
+            cout << "Insufficient";
+    }
+
+    cout << endl;
+    return 0;
+}
