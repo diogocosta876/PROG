@@ -1,0 +1,25 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+#include <ctime>
+
+using namespace std;
+
+time_t timeElapsed() {
+    double clock = time(NULL);
+    return clock ;
+}
+
+int main() {
+    char a;
+    cout << "input something to start: "; cin >> a;
+    double initial_time = time(NULL);
+    while (cin.eof() == 0) {
+        cout << "input something to set next timer point: "; cin >> a;
+        double current_time = timeElapsed();
+        cout << current_time - initial_time <<"\n";
+    }
+    return 0;
+}
