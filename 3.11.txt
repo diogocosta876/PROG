@@ -1,0 +1,27 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <climits>
+using namespace std;
+
+
+int gcd_rec(int m, int n) {
+	if (m % n == 0)
+		return n;
+	else {
+		return gcd_rec(n, m % n);
+	}
+}
+
+
+int main() {
+	int m, n;
+
+	cout << "m: "; cin >> m;
+	cout << "n: "; cin >> n;
+
+	cout << "\n" << gcd_rec(m, n);
+
+	return 0;
+}
