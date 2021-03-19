@@ -1,0 +1,33 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <climits>
+using namespace std;
+
+
+unsigned long long factorial_ite(unsigned int n) {
+	unsigned long long result = 1;
+	for (int i = 1; i <= n; i++) {
+		result *= i;
+	}
+	return result;
+}
+
+
+int main() {
+	int counter = 1;
+	unsigned long long result;
+	while (counter < ULLONG_MAX) {
+		result = factorial_ite(counter);
+		cout << "i: " << counter << "\t" << "result: " << result << endl;
+
+		if (result <= 0)
+			break;
+
+		counter++;
+	}
+	counter--;  //the last sum went over ULLONG_MAX, therefore we have to subtract 1
+	cout << "max factorial: " << counter;
+	return 0;
+}

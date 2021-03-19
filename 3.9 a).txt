@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+bool IsLeap(int year) {
+	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+		return true;
+	else
+		return false;
+}
+
+int main() {
+	int year;
+
+	cout << "examples: \n" << "4: " << IsLeap(4) << "\n2000:  " << IsLeap(2000) << "\n2100: " << IsLeap(2100) << "\n2022: " << IsLeap(2022) << endl;
+
+	while (cin.eof() == 0) {
+		cout << "year: "; cin >> year;
+		cout << IsLeap(year) << endl;
+	}
+
+	return 0;
+}

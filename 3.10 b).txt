@@ -1,0 +1,23 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <climits>
+using namespace std;
+
+
+unsigned long long factorial_rec(unsigned int n) {
+	if (n == 1)
+		return 1;
+	else
+		return n * factorial_rec(n - 1);
+}
+
+
+int main() {
+	int n;
+	cout << "input n: "; cin >> n;
+	cout << factorial_rec(n) << endl;
+
+	return 0;
+}

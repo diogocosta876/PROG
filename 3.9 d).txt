@@ -1,0 +1,287 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+using namespace std;
+
+bool IsLeap(int year) {
+	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+		return true;
+	else
+		return false;
+}
+
+int daysInMonth(int month, int year) {
+	int days = 0;
+	switch (month) {
+	case (1):
+		days = 31;
+		break;
+	case (2):
+		if (IsLeap(year) == 1)
+			days = 29;
+		else
+			days = 28;
+		break;
+	case (3):
+		days = 31;
+		break;
+	case (4):
+		days = 31;
+		break;
+	case (5):
+		days = 31;
+		break;
+	case (6):
+		days = 31;
+		break;
+	case (7):
+		days = 31;
+		break;
+	case (8):
+		days = 31;
+		break;
+	case (9):
+		days = 31;
+		break;
+	case (10):
+		days = 31;
+		break;
+	case (11):
+		days = 31;
+		break;
+	case (12):
+		days = 31;
+		break;
+	}
+	return days;
+}
+
+int monthCode(int month, bool isleap) {
+	int code = 100;
+
+	switch (month) {
+	case 1:
+		if (isleap)
+			code = 6;
+		else
+			code = 0;
+		break;
+	case 2:
+		if (isleap)
+			code = 2;
+		else
+			code = 3;
+		break;
+	case 3:
+		code = 3;
+		break;
+	case 4:
+		code = 6;
+		break;
+	case 5:
+		code = 1;
+		break;
+	case 6:
+		code = 4;
+		break;
+	case 7:
+		code = 6;
+		break;
+	case 8:
+		code = 2;
+		break;
+	case 9:
+		code = 5;
+		break;
+	case 10:
+		code = 0;
+		break;
+	case 11:
+		code = 3;
+		break;
+	case 12:
+		code = 5;
+		break;
+	}
+	return code;
+}
+
+string dayOfWeek(int day, int month, int year) {
+	int s;     //two first digits year
+	int a;     //two last digits year
+	int c;        //monthcode
+	int dayweek_number;
+	string dayweek;
+
+	s = year / 100; //outputs int
+	a = year % 100;
+
+	c = monthCode(month, IsLeap(month));
+
+	dayweek_number = ((5 * a / 4) + c + day - 2 * (s % 4) + 7) % 7;
+
+	switch (dayweek_number) {
+	case 0:
+		dayweek = "Saturday";
+		break;
+	case 1:
+		dayweek = "Sunday";
+		break;
+	case 2:
+		dayweek = "Monday";
+		break;
+	case 3:
+		dayweek = "Tuesday";
+		break;
+	case 4:
+		dayweek = "Wednesday";
+		break;
+	case 5:
+		dayweek = "Thursday";
+		break;
+	case 6:
+		dayweek = "Friday";
+		break;
+	}
+
+	return dayweek;
+}
+
+void monthInterpreter(int month, string& month_string) {
+	if (month == 1) {
+		month_string = "January";
+	}
+	else if (month == 2) {
+		month_string = "February";
+	}
+	else if (month == 3) {
+		month_string = "March";
+	}
+	else if (month == 4) {
+		month_string = "April";
+	}
+	else if (month == 5) {
+		month_string = "May";
+	}
+	else if (month == 6) {
+		month_string = "June";
+	}
+	else if (month == 7) {
+		month_string = "July";
+	}
+	else if (month == 8) {
+		month_string = "August";
+	}
+	else if (month == 9) {
+		month_string = "September";
+	}
+	else if (month == 10) {
+		month_string = "October";
+	}
+	else if (month == 11) {
+		month_string = "November";
+	}
+	else {
+		month_string = "December";
+	}
+}
+
+void displayMonth(int month, int year) {
+	vector<int> sun;
+	vector<int> mon;
+	vector<int> tue;
+	vector<int> wed;
+	vector<int> thu;
+	vector<int> fri;
+	vector<int> sat;
+
+	for (int i = 1; i <= daysInMonth(month, year); i++) {
+
+		string day = dayOfWeek(i, month, year);
+		if (day == "Saturday")
+			sat.push_back(i);
+		if (day == "Sunday")
+			sun.push_back(i);
+		if (day == "Monday")
+			mon.push_back(i);
+		if (day == "Tuesday")
+			tue.push_back(i);
+		if (day == "Wednesday")
+			wed.push_back(i);
+		if (day == "Thursday")
+			thu.push_back(i);
+		if (day == "Friday")
+			fri.push_back(i);
+	}
+
+	int i = 0;
+	while (i < daysInMonth(month, year)) {
+		if (find(sun.begin(), sun.end(), i) != sun.end()) {
+			cout << i << "\t";
+			i++;
+		}
+		else {
+			cout << " \t";
+		}
+		if (find(mon.begin(), mon.end(), i) != mon.end()) {
+			cout << i << "\t";
+			i++;
+		}
+		else
+			cout << " \t";
+		if (find(tue.begin(), tue.end(), i) != tue.end()) {
+			cout << i << "\t";
+			i++;
+		}
+		else
+			cout << " \t";
+		if (find(wed.begin(), wed.end(), i) != wed.end()) {
+			cout << i << "\t";
+			i++;
+		}
+		else
+			cout << " \t";
+		i++;
+		if (find(thu.begin(), thu.end(), i) != thu.end()) {
+			cout << i << "\t";
+			i++;
+		}
+		else
+			cout << " \t";
+		if (find(fri.begin(), fri.end(), i) != fri.end()) {
+			cout << i << "\t";
+			i++;
+		}
+		else
+			cout << " \t";
+		if (find(sat.begin(), sat.end(), i) != sat.end()) {
+			cout << i << "\n";
+			i++;
+		}
+		else
+			cout << " \n";
+	}
+	cout << "\n" << endl;
+}
+
+
+int main() {
+	int year;
+	int month;
+	int day;
+	string month_string;
+
+	cout << "month (1-12) : "; cin >> month;
+	cout << "year (1000-9999) : "; cin >> year;
+
+	cout << "days in month: " << daysInMonth(month, year) << "\n\n";
+	monthInterpreter(month, month_string); //gets month name
+
+	cout << month_string << '/' << 2021 << '\n';
+	cout << "Sun\t" << "Mon\t" << "Tue\t" << "Wed\t" << "Thu\t" << "Fri\t" << "Sat\n";
+
+	displayMonth(month, year);
+
+	return 0;
+}
