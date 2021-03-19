@@ -1,0 +1,70 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <climits>
+#include <cmath>
+using namespace std;
+const double PI = 3.1416;
+
+double distance_func(double x1, double y1, double x2, double y2) {
+	return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+double area(double radius) {
+	return (PI * radius * radius);
+}
+
+double area(double x1, double y1, double x2, double y2, double x3, double y3) {
+	double s, a, b, c;
+
+	a = distance_func(x1, y1, x2, y2);
+	b = distance_func(x2, y2, x3, y3);
+	c = distance_func(x1, y1, x3, y3);
+
+	s = (a + b + c) / 2.0;
+
+	double area = sqrt(s * (s - a) * (s - b) * (s - c));
+	return area;
+}
+
+double area(double x1,double y1, double x2,double  y2) {
+	double width = abs(y2 - y1);
+	double length = abs(x2 - x1);
+	return width * length;
+}
+
+
+int main() {
+	int input;
+	double x1, y1, x2, y2, x3, y3;
+
+	cout << "input 1 to calculate circle area \n";
+	cout << "input 2 to calculate triangle area\n";
+	cout << "input 3 to calculate rectangle area \n";
+	cout << "input: "; cin >> input;
+	
+	switch (input) {
+	case 1:
+		double radius;
+		cout << "radius: "; cin >> radius;
+
+		cout << "\n" << area(radius);
+		break;
+	case 2:
+		cout << "vertice 1: x y"; cin >> x1 >> y1;
+		cout << "vertice 2: x y"; cin >> x2 >> y2;
+		cout << "vertice 3: x y"; cin >> x3 >> y3;
+
+		cout << "\n" << area(x1, y1, x2, y2, x3, y3);
+		break;
+	case 3:
+		cout << "vertice 1: x y"; cin >> x1 >> y1;
+		cout << "vertice 2: x y"; cin >> x2 >> y2;
+
+		cout << "\n" << area(x1, y1, x2, y2);
+		break;
+	}
+
+	return 0;
+}
