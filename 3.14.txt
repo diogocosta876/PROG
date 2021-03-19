@@ -1,0 +1,40 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <vector>
+#include <stdlib.h>
+#include <algorithm>
+#include <chrono>
+#include <ctime>
+
+using namespace std;
+
+double g(double x) {
+    return pow(x, 2);
+}
+double h(double x) {
+    return sqrt(4 - pow(x, 2));
+}
+double integrateTR(double f(double), double a, double b, int n) {
+    double h = (b - a) / n;
+    double area = 0;
+
+    for (int i = 1; i*h < b -a ; i++) {  //condition can also be i <= n
+        area += h / 2 * (f(a + (i - 1) * h) + f(a + i * h));
+    }
+
+    return area;
+}
+
+int main() {
+    double a, b;
+    int n;
+    cout << "integral lower limit: "; cin >> a;
+    cout << "integral upper limit: "; cin >> b;
+    cout << "divisions: "; cin >> n;
+
+    cout << "integral definido de g (x^2) de \"a\" a \"b\":  " << integrateTR(g, a, b, n) << "\n";
+    cout << "integral definido de h (sqrt(4-x^2)) de \"a\" a \"b\":  " << integrateTR(h, a, b, n) << "\n";
+
+    return 0;
+}
