@@ -1,0 +1,57 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <array>
+#include <climits>
+#include <cmath>
+using namespace std;
+const double PI = 3.1416;
+
+void printArray(int a[], int arraysize) {
+	for (int i = 0; i < arraysize; i++) {
+		cout << a[i] << " ";
+	}
+	cout << "\n";
+}
+
+void bubblesort(int a[], int arraysize) {
+	cout << "array a[] initial state: \n";
+	printArray(a, arraysize);
+	char order;
+	cout << "ascending (a) or descending (d)?: "; cin >> order;
+
+	int tmp;
+	for (int i = 0; i < arraysize; i++) {
+		bool already_sorted = true;         // true before checking
+		for (int i = 0; i < arraysize-1; i++) {
+			if (order == 'a') {
+				if (a[i] > a[i + 1]) {
+					swap(a[i], a[i + 1]);
+					already_sorted = false;
+				}
+			}
+			else if (order == 'd') {
+				if (a[i] < a[i + 1]) {
+					swap(a[i], a[i + 1]);
+					already_sorted = false;
+				}
+			}
+		}
+		if (already_sorted == true)
+			break;
+	}
+
+	cout << "array a[] sorted: \n";
+	printArray(a, arraysize);
+}
+
+
+int main() {
+	int a[5] = { 5,4,1,3,2 };
+	int arraysize = sizeof(a) / sizeof(a[0]);
+
+	bubblesort(a, arraysize);
+
+	return 0;
+}
