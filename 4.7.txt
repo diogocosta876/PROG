@@ -1,0 +1,50 @@
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <climits>
+#include <cmath>
+using namespace std;
+const int NE = 5;
+
+void printmatrix(const int a[][NE]) {
+	for (int i = 0; i < NE; i++) {
+		for (int j = 0; j < NE; j++)
+			cout << a[i][j] << " ";
+		cout << "\n";
+	}
+	cout << endl;
+}
+
+void localMax(const int a[][NE]) {
+	for (int i = 1; i < NE - 1; i++) {
+		for (int j = 1; j < NE - 1; j++) {
+			if (a[i][j] >= a[i - 1][j - 1] &&
+				a[i][j] >= a[i][j - 1] &&
+				a[i][j] >= a[i - 1][j] &&
+				a[i][j] >= a[i][j] &&
+				a[i][j] >= a[i + 1][j + 1] &&
+				a[i][j] >= a[i + 1][j] &&
+				a[i][j] >= a[i][j + 1] &&
+				a[i][j] >= a[i + 1][j - 1] &&
+				a[i][j] >= a[i - 1][j + 1] ) {
+				cout << "local maxima at line " << i << " and column " << j << "\n";
+			}
+		}
+	}
+}
+
+int main() {
+	int a[5][5] = {
+		{7,3,4,1,3},
+		{2,9,6,2,1},
+		{1,3,5,1,4},
+		{6,5,2,7,5},
+		{4,2,1,3,6}
+	};
+	printmatrix(a);
+	localMax(a);
+	return 0;
+}
