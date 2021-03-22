@@ -1,0 +1,51 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <climits>
+#include <cmath>
+using namespace std;
+
+void printvector(vector<int> s) {
+	for (int i = 0; i < s.size(); i++) {
+		cout << s[i] << " "; 
+	}
+	cout << endl;
+}
+
+
+void binarysearch(vector<int> s, int value) {
+	int middle;
+	int last = s.size()-1;
+	int first = 0;
+	bool found = false;
+
+	while (found == false && first <= last) {
+		middle = ((last - first) / 2) + first;
+		if (s[middle] == value){
+			cout << value << " is at index " << middle;
+			found = true;
+			return;
+		}
+		else if (s[middle] < value) {
+			first = middle + 1;
+		}
+		else if (s[middle] > value) {
+			last = middle - 1;
+		}
+	}
+	cout << "value not in vector";
+}
+
+
+int main() {
+	vector<int> s = { 5,324,621,65,1,43,6,8,23};
+	sort(s.begin(), s.end());
+	printvector(s); cout << "\n";
+
+	cout << "7: "; binarysearch(s, 7); cout << "\n";
+	cout << "5: "; binarysearch(s, 5); cout << "\n";
+	cout << "324: "; binarysearch(s, 324); cout << "\n";
+	return 0;
+}

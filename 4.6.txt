@@ -1,0 +1,81 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <climits>
+#include <cmath>
+using namespace std;
+
+void printvector(vector<int> s) {
+	for (int i = 0; i < s.size(); i++) {
+		cout << s[i] << " "; 
+	}
+	cout << endl;
+}
+
+void removeDuplicates(vector<int>& s) {
+	for (int i = 0; i < s.size() - 1; i++) {      //initialize each number duplicate checking
+		for (int j = i + 1; j < s.size(); j++) {  //loop though every number to find duplicates
+			if (s[i] == s[j]) {
+				int k = j;
+				while (k < s.size() - 1) {   // once found, push every number back 1 position
+					s[k] = s[k + 1];
+					k++;
+				}
+				s.resize(s.size() - 1);
+			}
+		}
+	}
+}
+
+void bubblesort(vector<int> &s) {
+	int tmp;
+	for (int i = 0; i < s.size(); i++) {
+		for (int i = 0; i < s.size()-1; i++) {
+			if (s[i] > s[i + 1]) {
+				int tmp = s[i];
+				s[i] = s[i + 1];
+				s[i + 1] = tmp;
+			}
+		}
+	}
+}
+
+void vectorUnion(const vector<int>& v1, const vector<int>& v2, vector<int>& v3) {
+	for (int i = 0; i < v1.size(); i++) {
+		v3.push_back(v1[i]);
+	}
+	for (int i = 0; i < v2.size(); i++) {
+		v3.push_back(v2[i]);
+	}
+
+}
+
+void vectorIntersection(const vector<int>& v1, const vector<int>& v2, vector<int>& v3) {
+	for (int i = 0; i < v1.size(); i++) {
+		for (int j = 0; j < v2.size(); j++) {
+			if (v1[i] == v2[j]) {
+				v3.push_back(v1[i]);
+			}
+		}
+	}
+}
+
+int main() {
+	vector<int> v1  = { 1,3,5};
+	vector<int> v2 = { 1,2,4 };
+	vector<int> v3;
+	cout << "v1: "; printvector(v1); cout << "\n";
+	cout << "v2: "; printvector(v2); cout << "\n";
+	vectorUnion(v1, v2, v3);
+	removeDuplicates(v3);
+	bubblesort(v3);
+	cout << "union: "; printvector(v3); cout << "\n";
+
+	v3.clear();
+	vectorIntersection(v1, v2, v3);
+	bubblesort(v3);
+	cout << "intersection: "; printvector(v3); cout << "\n";
+	return 0;
+}
