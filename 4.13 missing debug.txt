@@ -1,0 +1,71 @@
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+using namespace std;
+int students, tests;
+//------------------------------------------------------------------------
+void fill_grades(int *grade)
+{
+	for (int st_num = 0; st_num < students; st_num++)
+		for (int quiz_num = 0; quiz_num < tests; quiz_num++)
+			grade[st_num][quiz_num] = 10 + rand() % 11;
+}
+//------------------------------------------------------------------------
+void compute_st_ave(const int *grade, double *st_ave)
+{
+	for (int st_num = 0; st_num < students; st_num++)
+	{
+		double sum = 0;
+		for (int quiz_num = 0; quiz_num < tests; quiz_num++)
+			sum = sum + *grade[st_num][quiz_num];
+		st_ave[st_num] = sum / tests;
+	}
+}
+//------------------------------------------------------------------------87
+void compute_quiz_ave(const int *grade, double *quiz_ave)
+{
+	for (int quiz_num = 0; quiz_num < tests; quiz_num++)
+	{
+		double sum = 0;
+		for (int st_num = 0; st_num < students; st_num++)
+			sum = sum + grade[st_num][quiz_num];
+		quiz_ave[quiz_num] = sum / students;
+	}
+}
+//------------------------------------------------------------------------
+void display(const int *grade, double *st_ave,
+	const double quiz_ave[])
+{
+	cout.setf(ios::fixed);
+	cout.setf(ios::showpoint);
+	cout.precision(1);
+	cout << setw(10) << "Student"
+		<< setw(5) << "Ave"
+		<< setw(15) << "Quizzes\n";
+	for (int st_num = 0; st_num < students; st_num++)
+	{
+		cout << setw(10) << st_num + 1
+			<< setw(5) << st_ave[st_num] << " ";
+		for (int quiz_num = 0; quiz_num < tests; quiz_num++)
+			cout << setw(5) << grade[st_num][quiz_num];
+		cout << endl;
+	}
+	cout << "Quiz averages = ";
+	for (int quiz_num = 0; quiz_num < tests; quiz_num++)
+		cout << setw(5) << quiz_ave[quiz_num];
+	cout << endl;
+}
+int main()
+{
+	cout << "n students: "; cin >> students;
+	cout << "n tests: "; cin >> tests;
+
+	int* grade = (int*)malloc(students * (tests * sizeof(int)));
+	double* st_ave = (double*)malloc(students * sizeof(double));
+	double* quiz_ave = (double*)malloc(students * sizeof(double));
+	fill_grades(grade);
+	compute_st_ave(grade, st_ave);
+	compute_quiz_ave(grade, quiz_ave);
+	display(grade, st_ave, quiz_ave);
+	return 0;
+}

@@ -1,0 +1,46 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <vector>
+#include <stdlib.h>
+#include <algorithm>
+#include <chrono>
+#include <ctime>
+
+using namespace std;
+
+void readArray(int* a, size_t nElem) {  //modifies array
+    for (int i = 0; i < nElem; i++) {
+        cout << "a[" << i << "] = ";
+        cin >> a[i];
+    }
+}
+
+int findValueInArray(const int *a, size_t nElem, int value, size_t pos1, size_t pos2) {
+    for (int i = pos1; i <= pos2; i++) {
+        cout << "a[" << i << "] = " << a[i] << "\n";
+        if (a[i] == value) {
+            cout << "value found at index " << i << "\n";
+            return i;
+        }
+    }
+    cout << "value not found within the given positions\n";
+    return -1;
+}
+
+int main() {
+    int nElems;
+    cout << "Enter the dimension of the array: " << endl;
+    cin >> nElems;
+    int*a = (int*) malloc(nElems * (sizeof(int)));
+    readArray(a, nElems);
+
+    while (cin.eof() == 0) {
+        int value, pos1, pos2, idx;            //value to find and range, idx to store index result
+        cout << "value: "; cin >> value;
+        cout << "pos1: "; cin >> pos1;
+        cout << "pos2: "; cin >> pos2;
+        idx = findValueInArray(a, nElems, value, pos1, pos2);
+    }
+    return 0;
+}
