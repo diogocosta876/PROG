@@ -4,36 +4,36 @@
 using namespace std;
 int students, tests;
 //------------------------------------------------------------------------
-void fill_grades(int *grade)
+void fill_grades(int* grade)
 {
 	for (int st_num = 0; st_num < students; st_num++)
 		for (int quiz_num = 0; quiz_num < tests; quiz_num++)
-			grade[st_num][quiz_num] = 10 + rand() % 11;
+			*(grade + st_num * tests + quiz_num) = 10 + rand() % 11;
 }
 //------------------------------------------------------------------------
-void compute_st_ave(const int *grade, double *st_ave)
+void compute_st_ave(const int* grade, double* st_ave)
 {
 	for (int st_num = 0; st_num < students; st_num++)
 	{
 		double sum = 0;
 		for (int quiz_num = 0; quiz_num < tests; quiz_num++)
-			sum = sum + *grade[st_num][quiz_num];
+			sum = sum + *(grade + st_num * tests + quiz_num);
 		st_ave[st_num] = sum / tests;
 	}
 }
 //------------------------------------------------------------------------87
-void compute_quiz_ave(const int *grade, double *quiz_ave)
+void compute_quiz_ave(const int* grade, double* quiz_ave)
 {
 	for (int quiz_num = 0; quiz_num < tests; quiz_num++)
 	{
 		double sum = 0;
 		for (int st_num = 0; st_num < students; st_num++)
-			sum = sum + grade[st_num][quiz_num];
+			sum = sum + *(grade + st_num * tests + quiz_num);
 		quiz_ave[quiz_num] = sum / students;
 	}
 }
 //------------------------------------------------------------------------
-void display(const int *grade, double *st_ave,
+void display(const int* grade, double* st_ave,
 	const double quiz_ave[])
 {
 	cout.setf(ios::fixed);
@@ -47,7 +47,7 @@ void display(const int *grade, double *st_ave,
 		cout << setw(10) << st_num + 1
 			<< setw(5) << st_ave[st_num] << " ";
 		for (int quiz_num = 0; quiz_num < tests; quiz_num++)
-			cout << setw(5) << grade[st_num][quiz_num];
+			cout << setw(5) << *(grade + st_num * tests + quiz_num);
 		cout << endl;
 	}
 	cout << "Quiz averages = ";
