@@ -1,0 +1,16 @@
+#include <iostream>
+
+using namespace std;
+
+char encryptChar(char c, int key) {
+
+	return (char)((int)c + key);
+}
+
+int main()
+{
+
+	char encrypted_char = encryptChar('a', 10);
+	cout << "encrypted : " << encrypted_char;
+	
+}
