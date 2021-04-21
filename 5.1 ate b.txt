@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+char encryptChar(char c, int key) {
+    char result;
+    if (key > 0) {
+        if (isupper(c)) {
+            result = char(((c + key - 65) % 26) + 65);
+        }
+        else {
+            result = char(((c + key - 97) % 26) + 97);
+        }
+    }
+    else {
+        if (isupper(c)) {
+            int aux = 0;
+            if (((c + key - 65) % 26) < 0) {
+                aux += 26;
+            }
+            result = char((((c + key - 65) % 26) + aux) + 65);
+        }
+        else {
+            int aux = 0;
+            if (((c + key - 97) % 26) < 0) {
+                aux += 26;
+            }
+            result = char((((c + key - 97) % 26) + aux) + 97);
+        }
+    }
+    return result;
+}
+
+string encryptString(string s, int key) {
+	string a = "";
+	for (int i = 0; i < s.size(); i++) {
+		a += encryptChar(s[i], key);
+	}
+	return a;
+}
+
+int main(){
+	string input;
+	int key;
+
+	char encrypted_char = encryptChar('a', 10);
+	cout << "encrypted char 'a' with key 10: " << encrypted_char << '\n';
+
+	string encrypted_string = encryptString("apple", 10);
+	cout << "encrypted string \"apple\" with key 10: " << encrypted_string << "\n\n";
+
+	cout << "input a string: "; getline(cin, input);
+	cout << "input an int key: "; cin >> key; cout << "\n";
+
+	cout << "encrypted string: " << encryptString(input, key) << "\n";
+
+
+}
