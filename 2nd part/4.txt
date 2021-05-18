@@ -1,0 +1,93 @@
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Client {
+public:
+    Client();
+    Client(string name, string billingAdress, string postalInfo);
+    void ShowClients();
+    string name;
+    string billingAdress;
+    string postalInfo;
+
+};
+
+class Product {
+public:
+    Product(string description, unsigned int price);
+    string description;
+private:
+    unsigned int price;
+};
+
+class Invoice {
+public:
+    Invoice(Client client);
+    void AddProduct(Product product, unsigned int quantity);
+    void Show();
+private:
+    Client client;
+    vector<pair<Product, int>> items;
+    
+};
+
+Client::Client() {
+    name = "";
+    billingAdress = "";
+    postalInfo = "";
+}
+Client::Client(string name, string billingAdress, string postalInfo) {
+    this->name = name;
+    this->billingAdress = billingAdress;
+    this->postalInfo = postalInfo;
+
+}
+//--------------------------------------------------------------
+
+Product::Product(string description, unsigned int price){
+    this->description = description;
+    this->price = price;
+}
+
+//----------------------------------------------------
+
+Invoice::Invoice(Client client) {
+    this->client = client;
+}
+
+void Invoice::AddProduct(Product product, unsigned int quantity) {
+    items.push_back(make_pair(product, quantity));
+}
+void Invoice::Show() {
+    cout << client.name << "\n";
+    cout << client.billingAdress << "\n";
+    cout << client.postalInfo << "\n";
+    cout << "Description\t\t" << "Price\t" << "Qty\t" << "Total\t";
+    for (size_t i = 0; i < items.size(); i++) {
+        cout << items[i].first.description << "\n";
+    }
+}
+//-------------------------------------------------
+int main()
+{
+    //insert products in stock
+    Product Product1("Pen USB", 5);
+    Product Product2("Rato PC", 10);
+    Product Product3("Teclado", 30);
+    Product Product4("Portátil HP", 550);
+
+    //insert clients
+    Client client1("Diogo Costa", "Rua Mestre Guilherme Camarinha 138", "4200-537");
+    Client client2("Joao Alves", "Avenida da Liberdade", "4200-690");
+
+    Invoice invoice1(client1);           //create invoice for a client
+    invoice1.AddProduct(Product1, 2);    //add purchased products
+    invoice1.AddProduct(Product4, 1);
+    invoice1.Show();                     //display invoice
+
+
+}

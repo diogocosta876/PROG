@@ -1,0 +1,133 @@
+#include <iostream>
+#include <iomanip>
+#include <algorithm>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Date
+{
+public:
+	Date(unsigned int year, unsigned int month, unsigned int day);
+	Date(string yearMonthDay);
+	void setYear(unsigned int year);
+	void setMonth(unsigned int month);
+	void setDay(unsigned int day);
+	void setDate(unsigned int year, unsigned int month, unsigned int day);
+	unsigned int getYear() const;
+	unsigned int getMonth() const;
+	unsigned int getDay() const;
+	std::string getDate() const; // returns the date in format "yyyy/mm/dd"
+	void show() const; // shows the date on the screen in format "yyyy/mm/dd"
+	bool isValid() const;
+	bool isEqualTo(const Date &date);
+	bool isAfter(const Date& date);
+private:
+	unsigned int year;
+	unsigned int month;
+	unsigned int day;
+	unsigned int numDays(unsigned int year, unsigned int month) const;
+};
+
+Date::Date(string yearMonthDay) { // yearMonthDay must be in format "yyyy/mm/dd"
+	this->year = stoi(yearMonthDay.substr(0, 4));
+	this->month = stoi(yearMonthDay.substr(5, 2));
+	this->day = stoi(yearMonthDay.substr(8, 2));
+	cout << "Date object created: ";
+	show();
+	cout << "\n";
+}
+
+Date::Date(unsigned int year, unsigned int month, unsigned int day) {
+	this->year = year;
+	this->month = month;
+	this->day = day;
+	cout << "Date object created: ";
+	show();
+	cout << "\n";
+}
+
+unsigned int Date::numDays(unsigned int year, unsigned int month) const {
+	unsigned int nd[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	unsigned int result = nd[month - 1];
+	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0 && month == 2) {
+		result++;
+	}
+	return result;
+}
+
+bool Date::isValid() const {
+	if (year < 0 || (month < 1 || month > 12) || (day > numDays(year, month))) {
+		return false;
+	}
+	return true;
+}
+
+bool Date::isEqualTo(const Date &date) {
+	if ((day == date.getDay() && month == date.getMonth() && year == date.getYear())) {
+		return true;
+	}
+	return false;
+}
+
+bool Date::isAfter(const Date& date) {
+	if (year > date.getYear() || (year > date.getYear() && month > date.getMonth()) || (year > date.getYear() && month > date.getMonth() && day > date.getDay())) {
+		return true;
+	}
+}
+
+void Date::setYear(unsigned int year) {
+	this->year = year;
+}
+void Date::setMonth(unsigned int month) {
+	this->month = month;
+}
+void Date::setDay(unsigned int day) {
+	this->day = day;
+}
+
+void Date::setDate(unsigned int year, unsigned int month, unsigned int day) {
+	this->year = year;
+	this->month = month;
+	this->day = day;
+}
+
+unsigned int Date::getYear() const {
+	return year;
+}
+unsigned int Date::getMonth()const {
+	return month;
+}
+unsigned int Date::getDay() const {
+	return day;
+}
+std::string Date::getDate() const {
+	size_t n_zero_year = 4;
+	size_t n_zero_month_day = 2;
+	string year_str = string(n_zero_year - to_string(year).length(), '0') + to_string(year);
+	string month_str = string(n_zero_month_day - to_string(month).length(), '0') + to_string(month);
+	string day_str = string(n_zero_month_day - to_string(day).length(), '0') + to_string(day);
+	return (year_str + "/" + month_str + "/" + day_str);
+}
+void Date::show() const { // shows the date on the screen in format "yyyy/mm/dd"
+	cout << getDate();
+}
+	
+int main() {
+	Date mydate(2002,2,4);
+	Date mydate2(2002, 2, 3);
+	if (mydate.isEqualTo(mydate2) == 1) {
+		cout << "dates are equal\n";
+	}
+	else {
+		cout << "dates aren't equal\n";
+	}
+	if (mydate.isAfter(mydate2) == 1 && (mydate.isEqualTo(mydate2) == 0)) {
+		cout << "1st date is of a later time\n";
+	}
+	else if (mydate.isEqualTo(mydate2) == 0) {
+		cout << "2nd date is of a later time\n";
+	}
+	return 0;
+}
