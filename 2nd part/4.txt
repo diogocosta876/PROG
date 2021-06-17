@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 class Product {
 public:
     Product(string description, unsigned int price);
+    unsigned int getPrice();
     string description;
 private:
     unsigned int price;
@@ -32,7 +34,7 @@ public:
 private:
     Client client;
     vector<pair<Product, int>> items;
-    
+
 };
 
 Client::Client() {
@@ -48,9 +50,12 @@ Client::Client(string name, string billingAdress, string postalInfo) {
 }
 //--------------------------------------------------------------
 
-Product::Product(string description, unsigned int price){
+Product::Product(string description, unsigned int price) {
     this->description = description;
     this->price = price;
+}
+unsigned int Product::getPrice() {
+    return price;
 }
 
 //----------------------------------------------------
@@ -65,10 +70,14 @@ void Invoice::AddProduct(Product product, unsigned int quantity) {
 void Invoice::Show() {
     cout << client.name << "\n";
     cout << client.billingAdress << "\n";
-    cout << client.postalInfo << "\n";
-    cout << "Description\t\t" << "Price\t" << "Qty\t" << "Total\t";
+    cout << client.postalInfo << "\n\n";
+    cout << "Description\t\t" << "Price\t" << "Qty\t" << "Total\n";
     for (size_t i = 0; i < items.size(); i++) {
-        cout << items[i].first.description << "\n";
+        cout << left << setw(10) << items[i].first.description << "\t\t";
+        cout << items[i].first.getPrice() << "\t";
+        cout << items[i].second << "\t";
+        cout << items[i].first.getPrice() * items[i].second << "\t";
+        cout << "\n";
     }
 }
 //-------------------------------------------------
@@ -78,7 +87,7 @@ int main()
     Product Product1("Pen USB", 5);
     Product Product2("Rato PC", 10);
     Product Product3("Teclado", 30);
-    Product Product4("Portátil HP", 550);
+    Product Product4("Portatil HP", 550);
 
     //insert clients
     Client client1("Diogo Costa", "Rua Mestre Guilherme Camarinha 138", "4200-537");
